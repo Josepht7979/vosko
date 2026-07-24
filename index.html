@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vosko — Customer Portals, Voice AI & Automation | vosko.com.au</title>
+<meta name="description" content="Australian-built customer portals, Voice AI agents and automation. We connect to your data and systems so your operations run themselves. Melbourne HQ, on the ground in Sydney, Brisbane & Perth.">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#0a0a0b;
+    --ink-2:#1d1d1f;
+    --muted:#6e6e73;
+    --faint:#86868b;
+    --line:#e4e4e7;
+    --line-2:#d2d2d7;
+    --panel:#f5f5f7;
+    --dark:#0a0a0b;
+    --maxw:1120px;
+    --shadow:0 30px 60px -32px rgba(0,0,0,.30);
+    --shadow-lg:0 40px 80px -30px rgba(0,0,0,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;letter-spacing:-.01em;
+  }
+  #bg-canvas{position:fixed;inset:0;z-index:0;display:block}
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(180%) blur(20px);
+    background:rgba(255,255,255,.7);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{font-weight:600;font-size:21px;letter-spacing:.14em}
+  .nav-links{display:flex;gap:34px;font-size:14px;color:var(--ink-2);font-weight:400}
+  .nav-links a{opacity:.8;transition:.2s}
+  .nav-links a:hover{opacity:1}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:500;cursor:pointer;
+    border:none;font-size:14px;padding:11px 22px;border-radius:100px;transition:.25s;white-space:nowrap}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:#000;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;border:1px solid var(--line-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink);}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;z-index:2;padding:56px 0 32px;text-align:center}
+  .kicker{font-size:clamp(17px,2.1vw,21px);font-weight:500;letter-spacing:-.005em;color:var(--ink-2);margin-bottom:26px}
+  .hero h1{font-size:clamp(46px,8.4vw,104px);line-height:.98;font-weight:600;letter-spacing:-.045em;margin-bottom:28px}
+  .hero h1 .thin{font-weight:300;color:var(--muted)}
+  .hero p.lead{font-size:clamp(18px,2.3vw,23px);color:var(--muted);max-width:660px;margin:0 auto 40px;font-weight:400;line-height:1.5}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .hero-cta .btn{padding:14px 28px;font-size:15px}
+  .spacer3d{height:min(25vh,230px)}
+
+  /* SECTION SHELL */
+  section{position:relative;z-index:2;padding:104px 0}
+  .center{text-align:center}
+  .kick2{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:18px}
+  .h2{font-size:clamp(32px,5vw,56px);font-weight:600;letter-spacing:-.035em;margin-bottom:20px;line-height:1.04}
+  .sub{color:var(--muted);max-width:600px;margin:0 auto 60px;font-size:19px;font-weight:400}
+  .panel-sec{background:var(--panel)}
+
+  /* SERVICES — interactive cards */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:34px 30px;position:relative;
+    cursor:pointer;transition:transform .18s ease,box-shadow .3s,border-color .3s;transform-style:preserve-3d;overflow:hidden}
+  .card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.055),transparent 62%)}
+  .card:hover{box-shadow:var(--shadow-lg);border-color:transparent;z-index:3}
+  .card:hover::after{opacity:1}
+  .ico{width:46px;height:46px;display:grid;place-items:center;margin-bottom:24px;color:var(--ink);transition:transform .35s}
+  .card:hover .ico{transform:translateY(-2px) scale(1.06)}
+  .ico svg{width:30px;height:30px;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+  .card p{color:var(--muted);font-size:15px;margin-bottom:20px;line-height:1.55}
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:20px}
+  .card li{font-size:14px;color:var(--ink-2);display:flex;gap:11px;align-items:flex-start}
+  .card li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink);margin-top:8px;flex:0 0 auto;opacity:.55}
+  .tag{position:absolute;top:34px;right:30px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .learn{margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink);
+    opacity:0;transform:translateX(-6px);transition:.35s}
+  .card:hover .learn{opacity:1;transform:none}
+  .learn .arw{transition:transform .35s}
+  .card:hover .learn .arw{transform:translateX(4px)}
+  .cta-band{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:32px 34px}
+  .cta-band h3{margin-bottom:6px}
+  .cta-band p{margin-bottom:0;max-width:640px}
+  @media(max-width:600px){.cta-band{flex-direction:column;align-items:flex-start}}
+
+  /* DATA / INTEGRATIONS */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.feat{grid-template-columns:1fr}}
+  .feat-card{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:44px 40px;position:relative;overflow:hidden;
+    cursor:pointer;transition:transform .18s ease,box-shadow .3s,border-color .3s;transform-style:preserve-3d}
+  .feat-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;
+    background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.05),transparent 62%)}
+  .feat-card:hover{box-shadow:var(--shadow-lg);border-color:transparent;z-index:3}
+  .feat-card:hover::after{opacity:1}
+  .feat-card .ico{transition:transform .35s}
+  .feat-card:hover .ico{transform:translateY(-2px) scale(1.06)}
+  .feat-card .ico{width:52px;height:52px;margin-bottom:26px}
+  .feat-card .ico svg{width:34px;height:34px}
+  .feat-card h3{font-size:26px;font-weight:600;letter-spacing:-.025em;margin-bottom:14px}
+  .feat-card p{color:var(--muted);font-size:16px;line-height:1.6;margin-bottom:22px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:7px 14px}
+
+  /* WHY / STATEMENT */
+  .why{text-align:center;max-width:900px;margin:0 auto}
+  .why h2{font-size:clamp(30px,4.6vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.1}
+  .why h2 .thin{font-weight:300;color:var(--muted)}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:76px}
+  @media(max-width:700px){.stat-row{grid-template-columns:1fr 1fr}}
+  .stat{background:var(--bg);padding:44px 20px}
+  .stat b{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.04em;display:block;line-height:1}
+  .stat span{color:var(--muted);font-size:13px;margin-top:12px;display:block}
+
+  /* PROCESS */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  @media(max-width:820px){.steps{grid-template-columns:1fr 1fr;gap:40px 0}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
+  .step{padding:0 30px;border-left:1px solid var(--line)}
+  .step:first-child{border-left:none;padding-left:0}
+  .step .num{font-size:14px;font-weight:600;color:var(--faint);letter-spacing:.1em}
+  .step h4{margin:18px 0 10px;font-size:20px;font-weight:600;letter-spacing:-.02em}
+  .step p{color:var(--muted);font-size:14px;line-height:1.55}
+
+  /* PRESENCE / AUSTRALIA */
+  .presence{text-align:center}
+  .presence h2{font-size:clamp(30px,4.6vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.08;margin-bottom:18px}
+  .presence h2 .thin{font-weight:300;color:var(--muted)}
+  .presence .sub{margin-bottom:52px}
+  .cities{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  @media(max-width:700px){.cities{grid-template-columns:1fr 1fr}}
+  .city{background:var(--bg);padding:38px 20px}
+  .city b{font-size:22px;font-weight:600;letter-spacing:-.02em;display:block}
+  .city span{color:var(--faint);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;display:block}
+
+  /* CTA (dark) */
+  .cta{background:var(--dark);color:#fff;text-align:center;position:relative;z-index:3}
+  .cta .kick2{color:#8a8a8f}
+  .cta h2{font-size:clamp(34px,5.4vw,64px);font-weight:600;letter-spacing:-.04em;margin-bottom:22px;line-height:1.03}
+  .cta h2 .thin{font-weight:300;color:#a1a1a6}
+  .cta p{color:#a1a1a6;font-size:19px;max-width:540px;margin:0 auto 40px}
+  .cta .btn-primary{background:#fff;color:var(--ink)}
+  .cta .btn-primary:hover{background:#f0f0f2}
+  .cta .btn-ghost{border-color:rgba(255,255,255,.28);color:#fff}
+  .cta .btn-ghost:hover{border-color:#fff}
+  .cta .hero-cta .btn{padding:15px 30px;font-size:15px}
+
+  /* FOOTER */
+  footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:58px 0 44px}
+  .foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{max-width:290px}
+  .foot-brand .logo{display:inline-block;margin-bottom:16px}
+  .foot p{color:var(--muted);font-size:14px;line-height:1.6}
+  .foot-col h5{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+  .foot-col a{display:block;color:var(--ink-2);font-size:14px;margin-bottom:11px;opacity:.85}
+  .foot-col a:hover{opacity:1}
+  .foot-col .plain{display:block;color:var(--ink-2);font-size:14px;margin-bottom:11px;opacity:.85}
+  .copyright{color:var(--faint);font-size:13px;margin-top:46px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top">VOSKO</a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#data">Integrations</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-primary" href="#book">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Software &amp; AI to modernise your operations</div>
+    <h1>Run your business<br><span class="thin">on autopilot.</span></h1>
+    <p class="lead">We build customer portals, Voice AI agents and automation that plug into your data and systems — so your operations run themselves and the busywork disappears.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#book">Book a strategy call</a>
+      <a class="btn btn-ghost" href="#services">Explore services</a>
+    </div>
+  </div>
+  <div class="spacer3d"></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="panel-sec">
+  <div class="wrap">
+    <div class="center">
+      <div class="kick2 reveal">What we build</div>
+      <h2 class="h2 reveal">Fewer moving parts.<br>More done automatically.</h2>
+      <p class="sub reveal">Every system we build has one job — give you back time and make your customers' experience effortless.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal" tabindex="0">
+        <span class="tag">Most popular</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div>
+        <h3>Customer Portals</h3>
+        <p>One branded hub, wired straight into your database — so every record, order and update appears for your customers automatically, always live.</p>
+        <ul>
+          <li>Connected to your existing data — no manual entry</li>
+          <li>Bookings, invoices, files &amp; live status in one login</li>
+          <li>Fully branded to feel like your own product</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+        <h3>Voice AI Agents</h3>
+        <p>A tireless AI that answers your phone and connects to your helpdesk and systems — so it gives customers real, live updates, not just takes a message.</p>
+        <ul>
+          <li>Talks to your helpdesk &amp; business systems</li>
+          <li>Answers every call and books straight into your calendar</li>
+          <li>Reduces reception &amp; admin workload, 24/7</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M7.5 18a4.5 4.5 0 0 1-.5-8.97A6 6 0 0 1 18.5 10a3.5 3.5 0 0 1-.5 8H7.5Z"/><path d="M12 21v-4M10 19l2 2 2-2"/></svg></div>
+        <h3>Cloud Phone Systems</h3>
+        <p>Move your old phone system to the cloud and take your landline calls anywhere — mobile or desktop — with every call monitored end-to-end and rich analytics across your whole team.</p>
+        <ul>
+          <li>Take your landline calls on mobile or PC</li>
+          <li>No hardware or PBX — fully cloud-based</li>
+          <li>End-to-end call monitoring &amp; recording</li>
+          <li>Rich analytics on every call &amp; agent</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+        <h3>Workflow Automation</h3>
+        <p>We connect your tools and automate the repetitive tasks eating your day — quotes, follow-ups, data entry. Set once, runs forever.</p>
+        <ul>
+          <li>No more copy-paste or double entry</li>
+          <li>Automatic follow-ups &amp; reminders</li>
+          <li>Connects the apps you already use</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></div>
+        <h3>Chatbots &amp; Web AI</h3>
+        <p>Smart assistants on your website that answer instantly and turn visitors into booked leads — around the clock.</p>
+        <ul>
+          <li>Instant answers, 24/7 lead capture</li>
+          <li>Trained on your business &amp; services</li>
+          <li>Hands hot leads to your team</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
+        <h3>General IT Services</h3>
+        <p>Your on-call tech partner — setup, integrations, support and the behind-the-scenes plumbing that keeps everything running.</p>
+        <ul>
+          <li>Systems setup, migrations &amp; integrations</li>
+          <li>Ongoing support &amp; maintenance</li>
+          <li>One team for all your tech</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card cta-band reveal" tabindex="0">
+        <div>
+          <h3>Not sure where to start?</h3>
+          <p>Tell us where the time goes and we'll map the fastest wins for your business — at no cost.</p>
+        </div>
+        <a class="btn btn-primary" href="#book">Talk to us</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DATA / INTEGRATIONS -->
+<section id="data">
+  <div class="wrap">
+    <div class="center">
+      <div class="kick2 reveal">Connected, not bolted on</div>
+      <h2 class="h2 reveal">Your data and systems,<br>working as one.</h2>
+      <p class="sub reveal">We don't build islands. Everything we ship plugs into the tools and data you already have — so information flows automatically.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
+        <h3>Live database → portal</h3>
+        <p>A single branded portal, wired straight into your database — so customers see their orders, invoices, pricing and job status live, with zero manual updates from your team.</p>
+        <div class="chips">
+          <span class="chip">Live order tracking</span>
+          <span class="chip">Invoices &amp; statements</span>
+          <span class="chip">Online payments</span>
+          <span class="chip">Customer-specific pricing</span>
+          <span class="chip">Quotes &amp; approvals</span>
+          <span class="chip">Stock &amp; availability</span>
+          <span class="chip">Reorder &amp; repeat orders</span>
+          <span class="chip">Delivery tracking</span>
+          <span class="chip">Support tickets</span>
+          <span class="chip">Document &amp; file library</span>
+          <span class="chip">Job &amp; project status</span>
+          <span class="chip">Booking &amp; scheduling</span>
+          <span class="chip">Account &amp; order history</span>
+          <span class="chip">Product catalogue</span>
+          <span class="chip">Notifications &amp; alerts</span>
+          <span class="chip">Reports &amp; dashboards</span>
+          <span class="chip">Multi-user accounts</span>
+          <span class="chip">Roles &amp; permissions</span>
+          <span class="chip">Warranty &amp; service records</span>
+          <span class="chip">Secure login (2FA / SSO)</span>
+          <span class="chip">Branded white-label</span>
+          <span class="chip">Mobile-friendly</span>
+        </div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v4a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-1v6h1a2 2 0 0 0 2-2v-4a9 9 0 0 0-9-9Z"/><path d="M15 20a3 3 0 0 1-3 2"/></svg></div>
+        <h3>Voice AI ↔ on call, 24/7</h3>
+        <p>An AI phone agent that never clocks off — wired into your helpdesk and database so it answers real customer questions (live pricing, stock, order status and more) and books jobs straight into your calendar. Day or night, it gives real answers, never just takes a message.</p>
+        <div class="chips">
+          <span class="chip">Answers every call, 24/7</span>
+          <span class="chip">Never a missed call</span>
+          <span class="chip">After-hours coverage</span>
+          <span class="chip">Live &amp; discounted pricing</span>
+          <span class="chip">Stock on hand</span>
+          <span class="chip">Product descriptions &amp; specs</span>
+          <span class="chip">Order &amp; account status</span>
+          <span class="chip">Delivery &amp; ETA updates</span>
+          <span class="chip">Book &amp; reschedule jobs</span>
+          <span class="chip">Lead qualification</span>
+          <span class="chip">Helpdesk &amp; ticketing</span>
+          <span class="chip">Raise &amp; update tickets</span>
+          <span class="chip">Answers FAQs</span>
+          <span class="chip">Warranty &amp; returns</span>
+          <span class="chip">Transfers to a human</span>
+          <span class="chip">Call summaries &amp; transcripts</span>
+          <span class="chip">Multi-language</span>
+          <span class="chip">Opening hours &amp; location</span>
+          <span class="chip">Real-time database lookup</span>
+          <span class="chip">Overflow &amp; busy-hour calls</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" class="panel-sec">
+  <div class="wrap why">
+    <div class="kick2 reveal">Why Vosko</div>
+    <h2 class="reveal">You didn't start your business to drown in admin. <span class="thin">We build the systems that quietly handle it — so your team can focus on the work that grows the business.</span></h2>
+    <div class="stat-row reveal">
+      <div class="stat"><b>0</b><span>missed calls, day or night</span></div>
+      <div class="stat"><b>24/7</b><span>self-service for customers</span></div>
+      <div class="stat"><b>Hours</b><span>of admin saved weekly</span></div>
+      <div class="stat"><b>Weeks</b><span>to launch, not months</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="center">
+      <div class="kick2 reveal">Process</div>
+      <h2 class="h2 reveal">Simple, and clear at every step.</h2>
+      <p class="sub reveal">No jargon. You'll always know exactly what's being built and why.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">01</div><h4>Discovery</h4><p>We learn your business and find where time and money are leaking.</p></div>
+      <div class="step reveal"><div class="num">02</div><h4>The plan</h4><p>A clear roadmap of what we'll build and the impact it'll have.</p></div>
+      <div class="step reveal"><div class="num">03</div><h4>We build</h4><p>Portals, AI agents and automations — designed, built and tested.</p></div>
+      <div class="step reveal"><div class="num">04</div><h4>Launch</h4><p>Live in weeks, with ongoing support as you scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENCE / AUSTRALIA -->
+<section id="presence" class="panel-sec">
+  <div class="wrap presence">
+    <div class="kick2 reveal">Proudly Australian</div>
+    <h2 class="reveal">Built here. <span class="thin">On the ground where you are.</span></h2>
+    <p class="sub reveal">Headquartered in Melbourne, with a physical presence across the east coast and west — real people, in your timezone.</p>
+    <div class="cities reveal">
+      <div class="city"><b>Melbourne</b><span>Headquarters</span></div>
+      <div class="city"><b>Sydney</b><span>On the ground</span></div>
+      <div class="city"><b>Brisbane</b><span>On the ground</span></div>
+      <div class="city"><b>Perth</b><span>On the ground</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="book" class="cta">
+  <div class="wrap">
+    <div class="kick2 reveal">Get started</div>
+    <h2 class="reveal">Make your operations<br><span class="thin">effortless.</span></h2>
+    <p class="reveal">Book a free 20-minute strategy call. We'll show you exactly where AI and automation can save you time — no pressure, no jargon.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="BOOKING_LINK_HERE" target="_blank" rel="noopener">Book my free call</a>
+      <a class="btn btn-ghost" href="mailto:EMAIL_HERE">Email us instead</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a class="logo" href="#top">VOSKO</a>
+        <p>Australian-built software, Voice AI and automation that make running your business effortless. Melbourne HQ, with a presence in Sydney, Brisbane &amp; Perth.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="#services">Customer Portals</a>
+        <a href="#services">Voice AI Agents</a>
+        <a href="#services">Cloud Phone Systems</a>
+        <a href="#services">Workflow Automation</a>
+        <a href="#services">Chatbots &amp; Web AI</a>
+        <a href="#services">General IT Services</a>
+      </div>
+      <div class="foot-col">
+        <h5>Locations</h5>
+        <span class="plain">Melbourne</span>
+        <span class="plain">Sydney</span>
+        <span class="plain">Brisbane</span>
+        <span class="plain">Perth</span>
+      </div>
+      <div class="foot-col">
+        <h5>Get in touch</h5>
+        <a href="BOOKING_LINK_HERE" target="_blank" rel="noopener">Book a call</a>
+        <a href="mailto:EMAIL_HERE">EMAIL_HERE</a>
+        <a href="tel:PHONE_HERE">PHONE_HERE</a>
+      </div>
+    </div>
+    <div class="copyright"><span>Vosko © 2026</span><span>Australia</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------- Reveal on scroll ---------- */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3)*0.07+'s';io.observe(el)});
+
+/* ---------- Interactive service cards: tilt + spotlight ---------- */
+document.querySelectorAll('.card, .feat-card').forEach(card=>{
+  const amp=card.classList.contains('feat-card')?3:5;
+  card.addEventListener('pointermove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    card.style.setProperty('--mx',(x*100)+'%');
+    card.style.setProperty('--my',(y*100)+'%');
+    const rx=(0.5-y)*amp, ry=(x-0.5)*amp;
+    card.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-4px)';
+  });
+  card.addEventListener('pointerleave',()=>{card.style.transform='';});
+});
+
+/* ---------- 3D: precision chrome gyroscope core ---------- */
+(function(){
+  if(!window.THREE) return;
+  const canvas=document.getElementById('bg-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.05;
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,100);
+  camera.position.z=16;
+
+  function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
+  resize();addEventListener('resize',resize);
+
+  /* studio gradient environment -> soft greyscale reflections */
+  function makeEnv(){
+    const c=document.createElement('canvas');c.width=32;c.height=256;
+    const ctx=c.getContext('2d');
+    const g=ctx.createLinearGradient(0,0,0,256);
+    g.addColorStop(0,'#ffffff');g.addColorStop(.45,'#eef0f2');
+    g.addColorStop(.55,'#c4c7cc');g.addColorStop(1,'#7d7f85');
+    ctx.fillStyle=g;ctx.fillRect(0,0,32,256);
+    const t=new THREE.CanvasTexture(c);t.mapping=THREE.EquirectangularReflectionMapping;return t;
+  }
+  const pmrem=new THREE.PMREMGenerator(renderer);pmrem.compileEquirectangularShader();
+  const env=pmrem.fromEquirectangular(makeEnv()).texture;
+  scene.environment=env;
+
+  scene.add(new THREE.AmbientLight(0xffffff,.32));
+  const key=new THREE.DirectionalLight(0xffffff,1.15);key.position.set(-6,8,10);scene.add(key);
+  const rim=new THREE.DirectionalLight(0xffffff,.55);rim.position.set(6,-4,4);scene.add(rim);
+
+  const chrome=new THREE.MeshStandardMaterial({color:0xcfd1d6,metalness:1,roughness:.16,envMapIntensity:1.25});
+  const graphite=new THREE.MeshStandardMaterial({color:0x1d1d1f,metalness:1,roughness:.28,envMapIntensity:1.0});
+
+  const core=new THREE.Group();scene.add(core);
+
+  /* three precision rings on distinct axes = gyroscope */
+  const ringA=new THREE.Mesh(new THREE.TorusGeometry(3.15,.075,28,180),chrome);
+  const ringB=new THREE.Mesh(new THREE.TorusGeometry(2.55,.075,28,180),chrome);ringB.rotation.x=Math.PI/2;
+  const ringC=new THREE.Mesh(new THREE.TorusGeometry(1.95,.075,28,180),chrome);ringC.rotation.y=Math.PI/2;
+  core.add(ringA,ringB,ringC);
+
+  /* faceted inner crystal — light chrome so it never darkens the headline */
+  const crystal=new THREE.Mesh(new THREE.IcosahedronGeometry(1.0,0),chrome.clone());
+  core.add(crystal);
+
+  /* thin equatorial detail ring */
+  const halo=new THREE.Mesh(new THREE.TorusGeometry(3.7,.02,16,200),chrome);
+  halo.rotation.x=Math.PI/2.3;core.add(halo);
+
+  core.scale.setScalar(0.92);
+
+  let mx=0,my=0,tx=0,ty=0;
+  addEventListener('pointermove',e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5);});
+  let scrollY=0;addEventListener('scroll',()=>{scrollY=window.scrollY;});
+
+  function tick(){
+    mx+=(tx-mx)*.045;my+=(ty-my)*.045;
+    ringA.rotation.z+=.0016;ringA.rotation.x+=.0009;
+    ringB.rotation.z-=.0022;
+    ringC.rotation.x+=.0018;
+    crystal.rotation.y+=.004;crystal.rotation.x+=.002;
+    halo.rotation.z+=.001;
+    core.rotation.y=mx*.5;
+    core.rotation.x=0.12+my*.35;
+    core.position.y=-3.9 - scrollY*0.013;
+    core.position.x=mx*1.0;
+    camera.lookAt(0,0,0);
+    renderer.render(scene,camera);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>

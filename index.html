@@ -172,11 +172,46 @@
   .foot-col .plain{display:block;color:var(--ink-2);font-size:14px;margin-bottom:11px;opacity:.85}
   .copyright{color:var(--faint);font-size:13px;margin-top:46px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-  .reveal{opacity:0;transform:translateY(20px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
   .reveal.in{opacity:1;transform:none}
+
+  /* ---- fluid scroll + interactivity ---- */
+  .io-rise{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .io-rise.in{opacity:1;transform:none}
+  /* scroll progress bar */
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--ink);z-index:50;will-change:width}
+  /* animated nav underline */
+  .nav-links a{position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1.5px;width:0;background:var(--ink);transition:width .3s cubic-bezier(.16,1,.3,1)}
+  .nav-links a:hover::after{width:100%}
+  /* magnetic buttons ease back smoothly */
+  .btn{will-change:transform}
+  /* interactive chips */
+  .chip{transition:transform .22s cubic-bezier(.16,1,.3,1),border-color .22s,background .22s,color .22s,box-shadow .22s;cursor:default}
+  .chip:hover{transform:translateY(-3px);border-color:var(--ink);color:var(--ink);background:#fff;box-shadow:0 10px 22px -14px rgba(0,0,0,.4)}
+  /* stat tiles */
+  .stat{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .3s;position:relative}
+  .stat:hover{transform:translateY(-4px);background:#fff;box-shadow:var(--shadow-lg);z-index:2}
+  .stat b{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .stat:hover b{transform:scale(1.06)}
+  /* process steps */
+  .step{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .step:hover{transform:translateY(-5px)}
+  .step:hover .num{color:var(--ink)}
+  .step .num{transition:color .3s}
+  /* city tiles */
+  .city{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .3s;position:relative}
+  .city:hover{transform:translateY(-4px);background:#fff;box-shadow:var(--shadow-lg);z-index:2}
+  /* footer links slide */
+  .foot-col a{transition:opacity .22s,transform .22s cubic-bezier(.16,1,.3,1),color .22s}
+  .foot-col a:hover{opacity:1;transform:translateX(5px);color:var(--ink)}
+  /* logo + kicker subtle hover */
+  .logo{transition:opacity .2s} .logo:hover{opacity:.7}
+  @media(prefers-reduced-motion:reduce){.io-rise,.reveal{transition:none;opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 <canvas id="bg-canvas"></canvas>
 
 <header>
@@ -333,24 +368,17 @@
           <span class="chip">Live order tracking</span>
           <span class="chip">Invoices &amp; statements</span>
           <span class="chip">Online payments</span>
-          <span class="chip">Customer-specific pricing</span>
           <span class="chip">Quotes &amp; approvals</span>
           <span class="chip">Stock &amp; availability</span>
           <span class="chip">Reorder &amp; repeat orders</span>
           <span class="chip">Delivery tracking</span>
           <span class="chip">Support tickets</span>
-          <span class="chip">Document &amp; file library</span>
           <span class="chip">Job &amp; project status</span>
           <span class="chip">Booking &amp; scheduling</span>
           <span class="chip">Account &amp; order history</span>
           <span class="chip">Product catalogue</span>
-          <span class="chip">Notifications &amp; alerts</span>
           <span class="chip">Reports &amp; dashboards</span>
           <span class="chip">Multi-user accounts</span>
-          <span class="chip">Roles &amp; permissions</span>
-          <span class="chip">Warranty &amp; service records</span>
-          <span class="chip">Secure login (2FA / SSO)</span>
-          <span class="chip">Branded white-label</span>
           <span class="chip">Mobile-friendly</span>
         </div>
       </div>
@@ -361,9 +389,11 @@
         <div class="chips">
           <span class="chip">Answers every call, 24/7</span>
           <span class="chip">Never a missed call</span>
+          <span class="chip">Real-time database lookup</span>
+          <span class="chip">Overflow &amp; busy-hour calls</span>
           <span class="chip">After-hours coverage</span>
-          <span class="chip">Live &amp; discounted pricing</span>
-          <span class="chip">Stock on hand</span>
+          <span class="chip">Customer tiered pricing</span>
+          <span class="chip">Stock, product &amp; pricing questions</span>
           <span class="chip">Product descriptions &amp; specs</span>
           <span class="chip">Order &amp; account status</span>
           <span class="chip">Delivery &amp; ETA updates</span>
@@ -372,13 +402,8 @@
           <span class="chip">Helpdesk &amp; ticketing</span>
           <span class="chip">Raise &amp; update tickets</span>
           <span class="chip">Answers FAQs</span>
-          <span class="chip">Warranty &amp; returns</span>
           <span class="chip">Transfers to a human</span>
-          <span class="chip">Call summaries &amp; transcripts</span>
-          <span class="chip">Multi-language</span>
-          <span class="chip">Opening hours &amp; location</span>
-          <span class="chip">Real-time database lookup</span>
-          <span class="chip">Overflow &amp; busy-hour calls</span>
+          <span class="chip">Call recordings &amp; transcripts</span>
         </div>
       </div>
     </div>
@@ -479,10 +504,43 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <script>
 /* ---------- Reveal on scroll ---------- */
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3)*0.07+'s';io.observe(el)});
+
+/* ---------- extra staggered reveals for every element ---------- */
+const io2=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.chip, .stat, .city, .foot-col a, .foot-col h5').forEach((el,i)=>{el.classList.add('io-rise');el.style.transitionDelay=(i%7)*0.045+'s';io2.observe(el);});
+
+/* ---------- smooth inertia scrolling (Lenis) ---------- */
+let lenis=null;
+if(window.Lenis){
+  lenis=new Lenis({lerp:0.085, wheelMultiplier:1, smoothWheel:true, smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id.length>1){const el=document.querySelector(id);if(el){e.preventDefault();lenis.scrollTo(el,{offset:-66,duration:1.25});}}});
+  });
+}
+
+/* ---------- scroll progress bar ---------- */
+const prog=document.getElementById('progress');
+function updProg(){const d=document.documentElement;const max=d.scrollHeight-d.clientHeight;prog.style.width=(max>0?(d.scrollTop/max)*100:0)+'%';}
+addEventListener('scroll',updProg,{passive:true});
+if(lenis)lenis.on('scroll',updProg);
+updProg();
+
+/* ---------- magnetic buttons ---------- */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('pointermove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2);
+    btn.style.transform='translate('+(x*0.28).toFixed(1)+'px,'+(y*0.4).toFixed(1)+'px)';
+  });
+  btn.addEventListener('pointerleave',()=>{btn.style.transform='';});
+});
 
 /* ---------- Interactive service cards: tilt + spotlight ---------- */
 document.querySelectorAll('.card, .feat-card').forEach(card=>{

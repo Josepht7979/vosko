@@ -931,5 +931,86 @@ document.querySelectorAll('.card, .feat-card').forEach(card=>{
   frame();
 })();
 </script>
-</body>
+<!--
+  VOSKO — Mind-map flow animation
+  ================================
+  Animates BOTH circular diagrams: data "packets" pulse from the hub out to each
+  node and back, at random, with each node giving a soft pulse as a packet lands.
+  Works with your existing markup (.mindmap / .links line / .node) — nothing to
+  restructure. Monochrome, matches the site.
+
+  HOW TO ADD IT:
+  Paste this entire block into index.html, immediately BEFORE the closing </body> tag.
+  (It's safe to place after your existing <script>…</script>.)
+-->
+
+<style>
+  /* soft glow on the moving packets */
+  .mindmap .flow-dot{filter:drop-shadow(0 0 2.2px rgba(20,20,30,.5))}
+  /* node "receives" pulse when a packet lands */
+  .node.ping{transform:translate(-50%,-50%) scale(1.12)!important;border-color:var(--ink)!important;color:var(--ink)!important;box-shadow:0 14px 28px -12px rgba(0,0,0,.5)!important}
+  /* gentle hub breathing */
+  @keyframes voskoHubBreathe{0%,100%{box-shadow:0 26px 55px -22px rgba(20,20,40,.65)}50%{box-shadow:0 26px 60px -18px rgba(20,20,40,.82),0 0 0 7px rgba(20,20,30,.04)}}
+  .mindmap .hub{animation:voskoHubBreathe 3.6s ease-in-out infinite}
+  @media(prefers-reduced-motion:reduce){.mindmap .hub{animation:none}}
+</style>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  document.querySelectorAll('.mindmap').forEach(function(map){
+    var svg   = map.querySelector('.links');
+    if (!svg) return;
+    var nodes = map.querySelectorAll('.node');
+    var lines = Array.prototype.slice.call(svg.querySelectorAll('line'));
+    // each spoke: hub (x1,y1) -> node (x2,y2), paired to node by DOM order
+    var spokes = lines.map(function(l,i){
+      return { cx:+l.getAttribute('x1'), cy:+l.getAttribute('y1'),
+               nx:+l.getAttribute('x2'), ny:+l.getAttribute('y2'), node:nodes[i] };
+    });
+    if (!spokes.length) return;
+
+    var dots = [], MAX = 11;
+    function smooth(t){ return t*t*(3-2*t); }
+
+    function spawn(){
+      if (dots.length >= MAX) return;
+      var s   = spokes[(Math.random()*spokes.length)|0];
+      var out = Math.random() < 0.62;                 // more often flowing outward
+      var c   = document.createElementNS(NS,'circle');
+      c.setAttribute('r', (1.0 + Math.random()*0.55).toFixed(2));
+      c.setAttribute('fill', '#0a0a0b');
+      c.setAttribute('class','flow-dot');
+      c.setAttribute('opacity','0');
+      svg.appendChild(c);
+      dots.push({ el:c, s:s, out:out, t:0, speed:0.55 + Math.random()*0.9, pinged:false });
+    }
+
+    var last = performance.now();
+    function frame(now){
+      var dt = Math.min(0.05, (now - last)/1000); last = now;
+      for (var i=dots.length-1; i>=0; i--){
+        var d = dots[i];
+        d.t += dt * d.speed;
+        if (d.t >= 1){ if (d.out && !d.pinged) ping(d.s.node); d.el.remove(); dots.splice(i,1); continue; }
+        var e = smooth(d.t);
+        var fx = d.out ? d.s.cx : d.s.nx, fy = d.out ? d.s.cy : d.s.ny;
+        var tx = d.out ? d.s.nx : d.s.cx, ty = d.out ? d.s.ny : d.s.cy;
+        d.el.setAttribute('cx', (fx + (tx-fx)*e).toFixed(2));
+        d.el.setAttribute('cy', (fy + (ty-fy)*e).toFixed(2));
+        var op = d.t < 0.15 ? d.t/0.15 : d.t > 0.85 ? (1-d.t)/0.15 : 1;
+        d.el.setAttribute('opacity', Math.max(0, Math.min(1, op)).toFixed(2));
+        if (d.out && d.t > 0.9 && !d.pinged){ ping(d.s.node); d.pinged = true; }
+      }
+      requestAnimationFrame(frame);
+    }
+    function ping(node){ if(!node) return; node.classList.add('ping'); setTimeout(function(){ node.classList.remove('ping'); }, 320); }
+
+    (function loop(){ spawn(); setTimeout(loop, 150 + Math.random()*380); })();
+    requestAnimationFrame(frame);
+  });
+})();
+</script></body>
 </html>

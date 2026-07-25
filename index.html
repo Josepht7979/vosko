@@ -208,6 +208,85 @@
   /* logo + kicker subtle hover */
   .logo{transition:opacity .2s} .logo:hover{opacity:.7}
   @media(prefers-reduced-motion:reduce){.io-rise,.reveal{transition:none;opacity:1;transform:none}}
+
+  /* ============ PRODUCT TOUR / MOCKUPS ============ */
+  .tour .row{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center;margin-bottom:96px}
+  .tour .row:last-child{margin-bottom:0}
+  .tour .row.flip .copy{order:2}
+  @media(max-width:900px){.tour .row{grid-template-columns:1fr;gap:28px}.tour .row.flip .copy{order:0}}
+  .tour .copy .kick2{margin-bottom:14px}
+  .tour .copy h3{font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.03em;margin-bottom:14px;line-height:1.08}
+  .tour .copy p{color:var(--muted);font-size:17px;line-height:1.6;margin-bottom:18px}
+  .tour .copy .pts{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .tour .copy .pts li{font-size:15px;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
+  .tour .copy .pts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink);margin-top:8px;flex:0 0 auto}
+
+  /* app window */
+  .app{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 40px 80px -40px rgba(20,20,40,.4);overflow:hidden;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
+  .app:hover{transform:translateY(-6px);box-shadow:0 55px 100px -40px rgba(20,20,40,.5)}
+  .app::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(120deg,rgba(255,255,255,0) 55%,rgba(255,255,255,.55) 100%);}
+  .app.fade-b::before{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;z-index:3;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff)}
+  .abar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:#fbfbfd}
+  .abar .d{width:10px;height:10px;border-radius:50%;background:#e2e2e8}
+  .abar .url{margin-left:10px;font-size:11.5px;color:var(--faint);background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 12px}
+  .abody{display:flex;min-height:330px}
+  .aside{width:172px;flex:0 0 auto;border-right:1px solid var(--line);background:#fafafb;padding:16px 12px;display:flex;flex-direction:column;gap:3px}
+  @media(max-width:520px){.aside{display:none}}
+  .aside .logo2{font-size:12px;font-weight:700;letter-spacing:.14em;padding:4px 10px;margin-bottom:12px}
+  .aside .nav{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:8px;display:flex;align-items:center;gap:9px}
+  .aside .nav .gi{width:14px;height:14px;border-radius:4px;border:1.5px solid currentColor;opacity:.6}
+  .aside .nav.on{background:var(--ink);color:#fff}
+  .amain{flex:1;padding:18px 20px;min-width:0}
+  .amain h4{font-size:16px;font-weight:600;letter-spacing:-.02em;margin-bottom:2px}
+  .amain .muted{color:var(--faint);font-size:12.5px;margin-bottom:16px}
+  /* stat tiles */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+  @media(max-width:520px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+  .kpi .n{font-size:20px;font-weight:700;letter-spacing:-.02em}
+  .kpi .l{font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+  /* rows / tables */
+  .trow{display:grid;align-items:center;gap:10px;padding:10px 4px;border-top:1px solid var(--line);font-size:13px}
+  .trow.head{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;border-top:none}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;white-space:nowrap}
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .b-green{color:#1a7f4b;background:#e7f5ec}
+  .b-amber{color:#9a6a12;background:#fbf1dd}
+  .b-grey{color:#4b4b52;background:#eeeef1}
+  .b-blue{color:#2456c8;background:#e6edfb}
+  .short{color:#b23b3b;font-weight:600}
+  /* tabs */
+  .tabs{display:flex;gap:8px;margin-bottom:14px}
+  .tab{font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:9px;border:1px solid var(--line);color:var(--muted);background:#fff;display:flex;align-items:center;gap:7px}
+  .tab .c{font-size:10.5px;background:var(--panel);border-radius:100px;padding:1px 7px}
+  .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tab.on .c{background:rgba(255,255,255,.2)}
+  /* chat */
+  .chat{padding:18px}
+  .msg{max-width:82%;font-size:13px;line-height:1.5;padding:11px 14px;border-radius:14px;margin-bottom:12px}
+  .msg.u{margin-left:auto;background:var(--ink);color:#fff;border-bottom-right-radius:4px}
+  .msg.a{background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .msg.a ol{margin:8px 0 4px 16px;display:flex;flex-direction:column;gap:5px}
+  .cite{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:100px;padding:3px 10px;margin-top:8px}
+  .typing{display:inline-flex;gap:4px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;border-bottom-left-radius:4px}
+  .typing span{width:6px;height:6px;border-radius:50%;background:#b8b8c0;animation:blink 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+  /* map / route */
+  .mapwrap{position:relative;background:linear-gradient(180deg,#f7f8fa,#eef0f3);min-height:330px}
+  .mapwrap svg{position:absolute;inset:0;width:100%;height:100%}
+  .mapcard{position:absolute;right:16px;top:16px;width:186px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lg);padding:12px 13px}
+  .mapcard .t{font-size:12px;font-weight:600;margin-bottom:2px}
+  .mapcard .s{font-size:11px;color:var(--faint)}
+  .mapcard .eta{margin-top:8px;font-size:11px;font-weight:600;color:#1a7f4b}
+  /* crm pipeline */
+  .pipe{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .pcol{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px}
+  .pcol .h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:8px;display:flex;justify-content:space-between}
+  .deal{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 9px;margin-bottom:7px}
+  .deal .dn{font-size:12px;font-weight:600}
+  .deal .dv{font-size:11px;color:var(--muted);margin-top:2px}
 </style>
 </head>
 <body>
@@ -248,8 +327,8 @@
   <div class="wrap">
     <div class="center">
       <div class="kick2 reveal">What we build</div>
-      <h2 class="h2 reveal">Fewer moving parts.<br>More done automatically.</h2>
-      <p class="sub reveal">Every system we build has one job — give you back time and make your customers' experience effortless.</p>
+      <h2 class="h2 reveal">Stuck on an old ERP?<br>Keep it. We build around it.</h2>
+      <p class="sub reveal">If you're running a decade-old ERP with no real CRM, you don't need a costly, painful rip-and-replace. We wrap a modern layer over what you already have — so you get today's tools without touching your core system.</p>
     </div>
     <div class="grid">
 
@@ -339,6 +418,48 @@
         <span class="learn">Learn more <span class="arw">→</span></span>
       </div>
 
+      <div class="card reveal" tabindex="0">
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0M16 5a3 3 0 0 1 0 6M15 14.3a5.5 5.5 0 0 1 5.5 5.7"/></svg></div>
+          <h3>Built-in CRM</h3>
+        </div>
+        <p>No decent CRM? We build a clean, modern one right inside your portal — contacts, companies, deals and history — wired to the data you already have.</p>
+        <ul>
+          <li>Contacts, companies &amp; deal pipeline</li>
+          <li>Full activity &amp; order history per customer</li>
+          <li>No new system to learn or migrate to</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h11v15H6a2 2 0 0 0-2 2z"/><path d="M17 3v15M8 7.5h6M8 11h4"/></svg></div>
+          <h3>Manuals → AI Assistant</h3>
+        </div>
+        <p>We turn your tech manuals, how-to guides and troubleshooting docs into an engaging AI chatbot that answers customers and staff instantly — with the exact source.</p>
+        <ul>
+          <li>Instant answers from your own documents</li>
+          <li>Guided troubleshooting, step by step</li>
+          <li>Cites the manual &amp; page it came from</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
+      <div class="card reveal" tabindex="0">
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 6h11v9H3z"/><path d="M14 9h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg></div>
+          <h3>Freight &amp; Transit Tracking</h3>
+        </div>
+        <p>We connect to your freight and carrier portals by API, so your team and your customers see the exact live location and ETA of every order in transit.</p>
+        <ul>
+          <li>Live location of each order in transit</li>
+          <li>Accurate ETAs from the carrier itself</li>
+          <li>Kills "where's my delivery?" calls</li>
+        </ul>
+        <span class="learn">Learn more <span class="arw">→</span></span>
+      </div>
+
       <div class="card cta-band reveal" tabindex="0">
         <div>
           <h3>Not sure where to start?</h3>
@@ -363,9 +484,12 @@
       <div class="feat-card reveal">
         <div class="ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
         <h3>Live database → portal</h3>
-        <p>A single branded portal, wired straight into your database — so customers see their orders, invoices, pricing and job status live, with zero manual updates from your team.</p>
+        <p>Stop fielding "where's my order?" calls. A single branded portal, wired straight into your database, lets customers see live order status, delivery ETAs — even your incoming stock and backorder fulfilment dates — so they get answers instantly instead of picking up the phone.</p>
         <div class="chips">
           <span class="chip">Live order tracking</span>
+          <span class="chip">Incoming stock &amp; backorder ETAs</span>
+          <span class="chip">Fewer "where's my order?" calls</span>
+          <span class="chip">Self-service, 24/7</span>
           <span class="chip">Invoices &amp; statements</span>
           <span class="chip">Online payments</span>
           <span class="chip">Quotes &amp; approvals</span>
@@ -407,6 +531,199 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- PRODUCT TOUR -->
+<section id="tour" class="tour">
+  <div class="wrap">
+    <div class="center">
+      <div class="kick2 reveal">A look inside</div>
+      <h2 class="h2 reveal">What your team and customers get.</h2>
+      <p class="sub reveal">A glimpse of the tools we build around your existing systems. Sample screens — your real data, branding and workflows once we're live.</p>
+    </div>
+
+    <!-- 1. PORTAL DASHBOARD -->
+    <div class="row reveal">
+      <div class="copy">
+        <div class="kick2">Customer Portal</div>
+        <h3>Every answer, before they call.</h3>
+        <p>Customers log into a branded portal wired to your ERP — live order status, invoices, and your incoming stock with real backorder ETAs.</p>
+        <ul class="pts">
+          <li>Live orders, invoices &amp; payments in one login</li>
+          <li>Backorder fulfilment dates from your supplier data</li>
+          <li>"Where's my order?" calls simply stop</li>
+        </ul>
+      </div>
+      <div class="app fade-b">
+        <div class="abar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">portal.yourcompany.com</span></div>
+        <div class="abody">
+          <div class="aside">
+            <div class="logo2">YOURCO</div>
+            <div class="nav on"><span class="gi"></span>Dashboard</div>
+            <div class="nav"><span class="gi"></span>Orders</div>
+            <div class="nav"><span class="gi"></span>Invoices</div>
+            <div class="nav"><span class="gi"></span>Products</div>
+            <div class="nav"><span class="gi"></span>Support</div>
+          </div>
+          <div class="amain">
+            <h4>Good morning, Acme Trading</h4>
+            <div class="muted">Here's where your account stands today.</div>
+            <div class="kpis">
+              <div class="kpi"><div class="n">14</div><div class="l">Open orders</div></div>
+              <div class="kpi"><div class="n">6</div><div class="l">In transit</div></div>
+              <div class="kpi"><div class="n">3</div><div class="l">Backordered</div></div>
+              <div class="kpi"><div class="n">$8.2k</div><div class="l">Balance</div></div>
+            </div>
+            <div class="trow head" style="grid-template-columns:1.1fr 1fr 1fr">
+              <span>Order</span><span>Status</span><span>ETA</span></div>
+            <div class="trow" style="grid-template-columns:1.1fr 1fr 1fr">
+              <span>#SO-10482</span><span><span class="badge b-green">Ready to ship</span></span><span>Today</span></div>
+            <div class="trow" style="grid-template-columns:1.1fr 1fr 1fr">
+              <span>#SO-10476</span><span><span class="badge b-blue">In transit</span></span><span>Thu 14 Aug</span></div>
+            <div class="trow" style="grid-template-columns:1.1fr 1fr 1fr">
+              <span>#SO-10461</span><span><span class="badge b-amber">Backordered</span></span><span>ETA 22 Aug</span></div>
+            <div class="trow" style="grid-template-columns:1.1fr 1fr 1fr">
+              <span>#SO-10455</span><span><span class="badge b-blue">In transit</span></span><span>Fri 15 Aug</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. WAREHOUSE FULFILMENT -->
+    <div class="row flip reveal">
+      <div class="copy">
+        <div class="kick2">Warehouse fulfilment</div>
+        <h3>Ready, Partial &amp; Container — at a glance.</h3>
+        <p>Give your warehouse team instant clarity on what can ship now. Three views turn a stock guessing-game into a work list.</p>
+        <ul class="pts">
+          <li><b>Ready</b> — orders where every SKU is in stock</li>
+          <li><b>Partial</b> — what's on hand vs. what's short, per SKU</li>
+          <li><b>Container</b> — orders waiting on an inbound shipment</li>
+        </ul>
+      </div>
+      <div class="app fade-b">
+        <div class="abar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">ops.yourcompany.com / fulfilment</span></div>
+        <div class="abody"><div class="amain" style="width:100%">
+          <div class="tabs">
+            <div class="tab on">Ready <span class="c">18</span></div>
+            <div class="tab">Partial <span class="c">7</span></div>
+            <div class="tab">Container <span class="c">4</span></div>
+          </div>
+          <div class="muted" style="margin-bottom:8px">Partial — order #SO-10461 · 3 of 5 lines available</div>
+          <div class="trow head" style="grid-template-columns:1.4fr .7fr .7fr .8fr">
+            <span>SKU</span><span>Ordered</span><span>On hand</span><span>Status</span></div>
+          <div class="trow" style="grid-template-columns:1.4fr .7fr .7fr .8fr">
+            <span>PMP-X300</span><span>4</span><span>4</span><span><span class="badge b-green">Ready</span></span></div>
+          <div class="trow" style="grid-template-columns:1.4fr .7fr .7fr .8fr">
+            <span>VLV-22B</span><span>10</span><span>10</span><span><span class="badge b-green">Ready</span></span></div>
+          <div class="trow" style="grid-template-columns:1.4fr .7fr .7fr .8fr">
+            <span>SEAL-9</span><span>25</span><span>25</span><span><span class="badge b-green">Ready</span></span></div>
+          <div class="trow" style="grid-template-columns:1.4fr .7fr .7fr .8fr">
+            <span>HOSE-12M</span><span>8</span><span class="short">3</span><span><span class="badge b-amber">Short 5</span></span></div>
+          <div class="trow" style="grid-template-columns:1.4fr .7fr .7fr .8fr">
+            <span>FIT-BR34</span><span>12</span><span class="short">0</span><span><span class="badge b-grey">On container · 22 Aug</span></span></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 3. FREIGHT TRACKING -->
+    <div class="row reveal">
+      <div class="copy">
+        <div class="kick2">Freight &amp; transit tracking</div>
+        <h3>See exactly where every order is.</h3>
+        <p>We connect to your freight and carrier portals by API, so your team and your customers get the live location and true ETA of anything in transit.</p>
+        <ul class="pts">
+          <li>Live carrier location on one map</li>
+          <li>Real ETAs, not guesses</li>
+          <li>Same view for your team and your customers</li>
+        </ul>
+      </div>
+      <div class="app fade-b">
+        <div class="abar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">portal.yourcompany.com / tracking</span></div>
+        <div class="mapwrap">
+          <svg viewBox="0 0 600 330" preserveAspectRatio="none">
+            <path d="M40 250 C 160 230, 220 120, 340 130 S 520 90, 560 70" fill="none" stroke="#c9ccd3" stroke-width="2" stroke-dasharray="6 7"/>
+            <circle cx="40" cy="250" r="6" fill="#fff" stroke="#20202a" stroke-width="2"/>
+            <circle cx="340" cy="130" r="5" fill="#20202a"/>
+            <circle cx="560" cy="70" r="6" fill="#fff" stroke="#1a7f4b" stroke-width="2"/>
+            <g transform="translate(332,122)"><rect width="16" height="16" rx="3" fill="#20202a"/></g>
+          </svg>
+          <div class="mapcard">
+            <div class="t">#SO-10476 · In transit</div>
+            <div class="s">Carrier: NorthLine Freight</div>
+            <div class="s">Now near Albury, NSW</div>
+            <div class="eta">● On time — ETA Thu 14 Aug, 2pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. BUILT-IN CRM -->
+    <div class="row flip reveal">
+      <div class="copy">
+        <div class="kick2">Built-in CRM</div>
+        <h3>The CRM your ERP never gave you.</h3>
+        <p>A clean pipeline and full customer history, built right into the portal — so your team finally sees every contact, deal and order in one place.</p>
+        <ul class="pts">
+          <li>Drag-and-drop deal pipeline</li>
+          <li>Every order &amp; interaction on the customer's timeline</li>
+          <li>No migration — it reads your existing data</li>
+        </ul>
+      </div>
+      <div class="app fade-b">
+        <div class="abar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">crm.yourcompany.com</span></div>
+        <div class="abody"><div class="amain" style="width:100%">
+          <h4>Sales pipeline</h4>
+          <div class="muted">This quarter · $184k in play</div>
+          <div class="pipe">
+            <div class="pcol"><div class="h"><span>Lead</span><span>3</span></div>
+              <div class="deal"><div class="dn">Riverina Pumps</div><div class="dv">$12,400</div></div>
+              <div class="deal"><div class="dn">Delta Mining</div><div class="dv">$46,000</div></div>
+              <div class="deal"><div class="dn">BayTech</div><div class="dv">$8,900</div></div>
+            </div>
+            <div class="pcol"><div class="h"><span>Quoted</span><span>2</span></div>
+              <div class="deal"><div class="dn">Acme Trading</div><div class="dv">$31,200</div></div>
+              <div class="deal"><div class="dn">Coastal Co.</div><div class="dv">$18,750</div></div>
+            </div>
+            <div class="pcol"><div class="h"><span>Won</span><span>2</span></div>
+              <div class="deal"><div class="dn">Meridian Ltd</div><div class="dv">$52,000</div></div>
+              <div class="deal"><div class="dn">Orion Supply</div><div class="dv">$14,600</div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 5. MANUALS CHATBOT -->
+    <div class="row reveal">
+      <div class="copy">
+        <div class="kick2">Manuals → AI Assistant</div>
+        <h3>Your manuals, answering instantly.</h3>
+        <p>We turn your tech manuals, how-to guides and troubleshooting docs into an engaging assistant that walks customers and staff through the fix — and cites the source.</p>
+        <ul class="pts">
+          <li>Guided, step-by-step troubleshooting</li>
+          <li>Always cites the manual &amp; page</li>
+          <li>Deflects support tickets around the clock</li>
+        </ul>
+      </div>
+      <div class="app fade-b">
+        <div class="abar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">support.yourcompany.com / assistant</span></div>
+        <div class="chat">
+          <div class="msg u">The X300 pump won't prime after install — how do I fix it?</div>
+          <div class="msg a">Let's get it primed. Try these in order:
+            <ol>
+              <li>Close the discharge valve, open the suction valve fully.</li>
+              <li>Fill the pump casing through the priming port until it overflows.</li>
+              <li>Run for 30s — if no flow, check the suction line for air leaks.</li>
+            </ol>
+            <span class="cite">📄 Source: X300 Install Manual · p.42</span>
+          </div>
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -464,7 +781,7 @@
     <p class="reveal">Book a free 20-minute strategy call. We'll show you exactly where AI and automation can save you time — no pressure, no jargon.</p>
     <div class="hero-cta reveal">
       <a class="btn btn-primary" href="BOOKING_LINK_HERE" target="_blank" rel="noopener">Book my free call</a>
-      <a class="btn btn-ghost" href="mailto:EMAIL_HERE">Email us instead</a>
+      <a class="btn btn-ghost" href="mailto:info@vosko.com.au">Email us instead</a>
     </div>
   </div>
 </section>
@@ -480,8 +797,11 @@
       <div class="foot-col">
         <h5>Services</h5>
         <a href="#services">Customer Portals</a>
+        <a href="#services">Built-in CRM</a>
         <a href="#services">Voice AI Agents</a>
         <a href="#services">Cloud Phone Systems</a>
+        <a href="#services">Manuals → AI Assistant</a>
+        <a href="#services">Freight &amp; Transit Tracking</a>
         <a href="#services">Workflow Automation</a>
         <a href="#services">Chatbots &amp; Web AI</a>
         <a href="#services">General IT Services</a>
@@ -496,8 +816,8 @@
       <div class="foot-col">
         <h5>Get in touch</h5>
         <a href="BOOKING_LINK_HERE" target="_blank" rel="noopener">Book a call</a>
-        <a href="mailto:EMAIL_HERE">EMAIL_HERE</a>
-        <a href="tel:PHONE_HERE">PHONE_HERE</a>
+        <a href="mailto:info@vosko.com.au">info@vosko.com.au</a>
+        <a href="tel:+61424192799">0424 192 799</a>
       </div>
     </div>
     <div class="copyright"><span>Vosko © 2026</span><span>Australia</span></div>

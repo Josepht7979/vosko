@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
 <title>Vosko — Customer Portals, Voice AI & Automation | vosko.com.au</title>
 <meta name="description" content="Australian-built customer portals, Voice AI agents and automation. We connect to your data and systems so your operations run themselves. Melbourne HQ, on the ground in Sydney, Brisbane & Perth.">
 <style>
@@ -69,8 +70,12 @@
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
   @media(max-width:600px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:34px 30px;position:relative;
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:24px 24px;position:relative;
     cursor:pointer;transition:transform .18s ease,box-shadow .3s,border-color .3s;transform-style:preserve-3d;overflow:hidden}
+  .card-head{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:14px}
+  .card-head .ico{width:40px;height:40px;margin:0;flex:0 0 auto}
+  .card-head .ico svg{width:28px;height:28px}
+  .card-head h3{margin:0;font-size:20px}
   .card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;
     background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.055),transparent 62%)}
   .card:hover{box-shadow:var(--shadow-lg);border-color:transparent;z-index:3}
@@ -79,12 +84,12 @@
   .card:hover .ico{transform:translateY(-2px) scale(1.06)}
   .ico svg{width:30px;height:30px;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .card h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
-  .card p{color:var(--muted);font-size:15px;margin-bottom:20px;line-height:1.55}
-  .card ul{list-style:none;display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:20px}
+  .card p{color:var(--muted);font-size:14px;margin-bottom:14px;line-height:1.5}
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:14px}
   .card li{font-size:14px;color:var(--ink-2);display:flex;gap:11px;align-items:flex-start}
   .card li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink);margin-top:8px;flex:0 0 auto;opacity:.55}
-  .tag{position:absolute;top:34px;right:30px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-  .learn{margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink);
+  .tag{position:absolute;top:24px;right:24px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+  .learn{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink);
     opacity:0;transform:translateX(-6px);transition:.35s}
   .card:hover .learn{opacity:1;transform:none}
   .learn .arw{transition:transform .35s}
@@ -214,9 +219,11 @@
     <div class="grid">
 
       <div class="card reveal" tabindex="0">
-        <span class="tag">Most popular</span>
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div>
-        <h3>Customer Portals</h3>
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div>
+          <h3>Customer Portals</h3>
+          <span class="tag">Most popular</span>
+        </div>
         <p>One branded hub, wired straight into your database — so every record, order and update appears for your customers automatically, always live.</p>
         <ul>
           <li>Connected to your existing data — no manual entry</li>
@@ -227,8 +234,10 @@
       </div>
 
       <div class="card reveal" tabindex="0">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
-        <h3>Voice AI Agents</h3>
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+          <h3>Voice AI Agents</h3>
+        </div>
         <p>A tireless AI that answers your phone and connects to your helpdesk and systems — so it gives customers real, live updates, not just takes a message.</p>
         <ul>
           <li>Talks to your helpdesk &amp; business systems</li>
@@ -239,8 +248,10 @@
       </div>
 
       <div class="card reveal" tabindex="0">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M7.5 18a4.5 4.5 0 0 1-.5-8.97A6 6 0 0 1 18.5 10a3.5 3.5 0 0 1-.5 8H7.5Z"/><path d="M12 21v-4M10 19l2 2 2-2"/></svg></div>
-        <h3>Cloud Phone Systems</h3>
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M7.5 18a4.5 4.5 0 0 1-.5-8.97A6 6 0 0 1 18.5 10a3.5 3.5 0 0 1-.5 8H7.5Z"/><path d="M12 21v-4M10 19l2 2 2-2"/></svg></div>
+          <h3>Cloud Phone Systems</h3>
+        </div>
         <p>Move your old phone system to the cloud and take your landline calls anywhere — mobile or desktop — with every call monitored end-to-end and rich analytics across your whole team.</p>
         <ul>
           <li>Take your landline calls on mobile or PC</li>
@@ -252,8 +263,10 @@
       </div>
 
       <div class="card reveal" tabindex="0">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
-        <h3>Workflow Automation</h3>
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+          <h3>Workflow Automation</h3>
+        </div>
         <p>We connect your tools and automate the repetitive tasks eating your day — quotes, follow-ups, data entry. Set once, runs forever.</p>
         <ul>
           <li>No more copy-paste or double entry</li>
@@ -264,8 +277,10 @@
       </div>
 
       <div class="card reveal" tabindex="0">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></div>
-        <h3>Chatbots &amp; Web AI</h3>
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></div>
+          <h3>Chatbots &amp; Web AI</h3>
+        </div>
         <p>Smart assistants on your website that answer instantly and turn visitors into booked leads — around the clock.</p>
         <ul>
           <li>Instant answers, 24/7 lead capture</li>
@@ -276,8 +291,10 @@
       </div>
 
       <div class="card reveal" tabindex="0">
-        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
-        <h3>General IT Services</h3>
+        <div class="card-head">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
+          <h3>General IT Services</h3>
+        </div>
         <p>Your on-call tech partner — setup, integrations, support and the behind-the-scenes plumbing that keeps everything running.</p>
         <ul>
           <li>Systems setup, migrations &amp; integrations</li>
@@ -462,7 +479,6 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ---------- Reveal on scroll ---------- */
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
@@ -482,82 +498,42 @@ document.querySelectorAll('.card, .feat-card').forEach(card=>{
   card.addEventListener('pointerleave',()=>{card.style.transform='';});
 });
 
-/* ---------- 3D: precision chrome gyroscope core ---------- */
+/* ---------- Radar sweep (blips kept off the hero text) ---------- */
 (function(){
-  if(!window.THREE) return;
   const canvas=document.getElementById('bg-canvas');
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.outputEncoding=THREE.sRGBEncoding;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.05;
-
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,100);
-  camera.position.z=16;
-
-  function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
+  const ctx=canvas.getContext('2d');
+  let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2);
+  const INK='20,20,30';
+  let ang=0,blips=[],cx,cy,maxR,exX1,exX2,exY1,exY2;
+  function place(){
+    for(let k=0;k<50;k++){
+      const a=Math.random()*6.283, r=maxR*(0.34+Math.random()*0.64);
+      const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r;
+      if(x<exX1||x>exX2||y<exY1||y>exY2) return {a,r,b:0};
+    }
+    const a=Math.PI*(0.2+Math.random()*0.6), r=maxR*(0.78+Math.random()*0.22);
+    return {a,r,b:0};
+  }
+  function setup(){
+    cx=W*0.5;cy=H*0.46;maxR=Math.min(W,H)*0.5;
+    exX1=W*0.14;exX2=W*0.86;exY1=H*0.05;exY2=H*0.68;
+    blips=[];for(let i=0;i<12;i++)blips.push(place());
+  }
+  function resize(){W=innerWidth;H=innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0);setup();}
   resize();addEventListener('resize',resize);
-
-  /* studio gradient environment -> soft greyscale reflections */
-  function makeEnv(){
-    const c=document.createElement('canvas');c.width=32;c.height=256;
-    const ctx=c.getContext('2d');
-    const g=ctx.createLinearGradient(0,0,0,256);
-    g.addColorStop(0,'#ffffff');g.addColorStop(.45,'#eef0f2');
-    g.addColorStop(.55,'#c4c7cc');g.addColorStop(1,'#7d7f85');
-    ctx.fillStyle=g;ctx.fillRect(0,0,32,256);
-    const t=new THREE.CanvasTexture(c);t.mapping=THREE.EquirectangularReflectionMapping;return t;
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    canvas.style.opacity=Math.max(0,1-window.scrollY/(innerHeight*0.9));
+    ctx.strokeStyle='rgba('+INK+',.08)';ctx.lineWidth=1;
+    for(let k=1;k<=4;k++){ctx.beginPath();ctx.arc(cx,cy,maxR*k/4,0,6.283);ctx.stroke();}
+    ctx.beginPath();ctx.moveTo(cx-maxR,cy);ctx.lineTo(cx+maxR,cy);ctx.moveTo(cx,cy-maxR);ctx.lineTo(cx,cy+maxR);ctx.stroke();
+    const steps=44,span=0.95;
+    for(let i=0;i<steps;i++){const a=ang-i/steps*span,o=(1-i/steps)*0.16;ctx.strokeStyle='rgba('+INK+','+o.toFixed(3)+')';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*maxR,cy+Math.sin(a)*maxR);ctx.stroke();}
+    ang+=0.02;if(ang>6.283)ang-=6.283;
+    blips.forEach(bl=>{let diff=Math.abs(ang-bl.a);diff=Math.min(diff,6.283-diff);if(diff<0.05)bl.b=1;bl.b*=0.985;const x=cx+Math.cos(bl.a)*bl.r,y=cy+Math.sin(bl.a)*bl.r;ctx.fillStyle='rgba('+INK+','+(0.1+0.7*bl.b).toFixed(3)+')';ctx.beginPath();ctx.arc(x,y,2+2*bl.b,0,6.283);ctx.fill();});
+    requestAnimationFrame(frame);
   }
-  const pmrem=new THREE.PMREMGenerator(renderer);pmrem.compileEquirectangularShader();
-  const env=pmrem.fromEquirectangular(makeEnv()).texture;
-  scene.environment=env;
-
-  scene.add(new THREE.AmbientLight(0xffffff,.32));
-  const key=new THREE.DirectionalLight(0xffffff,1.15);key.position.set(-6,8,10);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xffffff,.55);rim.position.set(6,-4,4);scene.add(rim);
-
-  const chrome=new THREE.MeshStandardMaterial({color:0xcfd1d6,metalness:1,roughness:.16,envMapIntensity:1.25});
-  const graphite=new THREE.MeshStandardMaterial({color:0x1d1d1f,metalness:1,roughness:.28,envMapIntensity:1.0});
-
-  const core=new THREE.Group();scene.add(core);
-
-  /* three precision rings on distinct axes = gyroscope */
-  const ringA=new THREE.Mesh(new THREE.TorusGeometry(3.15,.075,28,180),chrome);
-  const ringB=new THREE.Mesh(new THREE.TorusGeometry(2.55,.075,28,180),chrome);ringB.rotation.x=Math.PI/2;
-  const ringC=new THREE.Mesh(new THREE.TorusGeometry(1.95,.075,28,180),chrome);ringC.rotation.y=Math.PI/2;
-  core.add(ringA,ringB,ringC);
-
-  /* faceted inner crystal — light chrome so it never darkens the headline */
-  const crystal=new THREE.Mesh(new THREE.IcosahedronGeometry(1.0,0),chrome.clone());
-  core.add(crystal);
-
-  /* thin equatorial detail ring */
-  const halo=new THREE.Mesh(new THREE.TorusGeometry(3.7,.02,16,200),chrome);
-  halo.rotation.x=Math.PI/2.3;core.add(halo);
-
-  core.scale.setScalar(0.92);
-
-  let mx=0,my=0,tx=0,ty=0;
-  addEventListener('pointermove',e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5);});
-  let scrollY=0;addEventListener('scroll',()=>{scrollY=window.scrollY;});
-
-  function tick(){
-    mx+=(tx-mx)*.045;my+=(ty-my)*.045;
-    ringA.rotation.z+=.0016;ringA.rotation.x+=.0009;
-    ringB.rotation.z-=.0022;
-    ringC.rotation.x+=.0018;
-    crystal.rotation.y+=.004;crystal.rotation.x+=.002;
-    halo.rotation.z+=.001;
-    core.rotation.y=mx*.5;
-    core.rotation.x=0.12+my*.35;
-    core.position.y=-3.9 - scrollY*0.013;
-    core.position.x=mx*1.0;
-    camera.lookAt(0,0,0);
-    renderer.render(scene,camera);
-    requestAnimationFrame(tick);
-  }
-  tick();
+  frame();
 })();
 </script>
 </body>
